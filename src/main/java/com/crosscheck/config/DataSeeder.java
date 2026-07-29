@@ -13,44 +13,67 @@ import java.util.List;
 @Configuration
 public class DataSeeder {
 
-    @Value("${crosscheck.admin.name:CrossCheck Administrator}")
+    @Value("${crosscheck.admin.name:CrosscheckAdmin}")
     private String adminName;
 
-    @Value("${crosscheck.admin.email:admin@crosscheck.local}")
+    @Value("${crosscheck.admin.email:HR@cross-check.in}")
     private String adminEmail;
 
-    @Value("${crosscheck.admin.password:ChangeMe123}")
+    @Value("${crosscheck.admin.password:Crosscheck@123}")
     private String adminPassword;
 
     @Bean
-    CommandLineRunner seed(UserRepository users, AuthService auth) {
-        return args -> {
-            enforceSingleAdmin(users, auth);
-        };
+    public CommandLineRunner seed(UserRepository users, AuthService auth) {
+        return args -> enforceSingleAdmin(users, auth);
     }
 
     private void enforceSingleAdmin(UserRepository users, AuthService auth) {
+
         List<User> admins = users.findAllByRoleIgnoreCaseOrderByIdAsc("ADMIN");
 
         if (admins.isEmpty()) {
+
             User admin = new User();
             admin.setName(adminName);
-            admin.setEmail(adminEmail.toLowerCase());
+            admin.setEmail(adminEmail);
             admin.setPassword(auth.encode(adminPassword));
             admin.setRole("ADMIN");
             admin.setActive(true);
 
             users.save(admin);
+
+            System.out.println("=======================================");
+            System.out.println("Admin user created successfully.");
+            System.out.println("Name     : " + adminName);
+            System.out.println("Email    : " + adminEmail);
+            System.out.println("Password : " + adminPassword);
+            System.out.println("=======================================");
+
         } else {
+
             User primary = admins.get(0);
+
+            primary.setName(adminName);
+            primary.setEmail(adminEmail);
+            primary.setPassword(auth.encode(adminPassword));
+            primary.setRole("ADMIN");
             primary.setActive(true);
+
             users.save(primary);
 
+            // Disable duplicate admin accounts
             for (int i = 1; i < admins.size(); i++) {
                 User extra = admins.get(i);
                 extra.setActive(false);
                 users.save(extra);
             }
+
+            System.out.println("=======================================");
+            System.out.println("Primary admin updated successfully.");
+            System.out.println("Name     : " + adminName);
+            System.out.println("Email    : " + adminEmail);
+            System.out.println("Password : " + adminPassword);
+            System.out.println("=======================================");
         }
     }
 }
