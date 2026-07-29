@@ -1,11 +1,29 @@
 package com.crosscheck.config;
-import org.springframework.context.annotation.Configuration;import org.springframework.web.servlet.config.annotation.*;
-@Configuration public class WebConfig implements WebMvcConfigurer{
-    public void addCorsMappings(CorsRegistry r){
-        r.addMapping("/api/**").allowedOrigins("http://localhost:5173","http://localhost:3000").allowedMethods("*").allowedHeaders("*");
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedOrigins(
+                        "http://localhost:5173",
+                        "http://localhost:3000",
+                        "https://cross-check-main-bfnt.vercel.app"
+                )
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
-    public void addResourceHandlers(ResourceHandlerRegistry r)
-    {
-        r.addResourceHandler("/uploads/**").addResourceLocations("file:uploads/");
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:uploads/");
     }
 }
