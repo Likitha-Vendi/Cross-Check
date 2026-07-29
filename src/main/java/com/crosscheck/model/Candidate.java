@@ -10,7 +10,10 @@ public class Candidate
  @GeneratedValue(strategy=GenerationType.IDENTITY)
  private Long id;
  private String name;
- @Lob private String photoData;
+ 
+ @Column(columnDefinition = "TEXT")
+private String photoData;
+ 
  private String photoFileName;
  @Column(unique=true)
  private String email;
@@ -44,11 +47,20 @@ public class Candidate
  private String educationStatus="PENDING";
  private String aadhaarNumber; private String panNumber;
  private String passportNumber;
- @Lob private String aadhaarDocumentData;
+ 
+@Column(columnDefinition = "TEXT")
+private String aadhaarDocumentData;
+ 
  private String aadhaarDocumentName;
- @Lob private String panDocumentData;
+ 
+@Column(columnDefinition = "TEXT")
+private String panDocumentData;
+ 
  private String panDocumentName;
- @Lob private String passportDocumentData;
+ 
+ @Column(columnDefinition = "TEXT")
+private String passportDocumentData;
+ 
  private String passportDocumentName;
  private String identityStatus="PENDING";
  private String offerCompanyName;
@@ -58,7 +70,10 @@ public class Candidate
  private String offerSalary;
  private LocalDate offerDate;
  private LocalDate proposedJoiningDate;
- @Lob private String offerLetterData;
+ 
+ @Column(columnDefinition = "TEXT")
+private String offerLetterData;
+ 
  private String offerLetterName;
  private String offerLetterStatus="PENDING";
 
