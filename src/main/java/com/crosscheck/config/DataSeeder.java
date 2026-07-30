@@ -13,13 +13,13 @@ import java.util.List;
 @Configuration
 public class DataSeeder {
 
-    @Value("${crosscheck.admin.name:CrosscheckAdmin}")
+    @Value("${crosscheck.admin.name:RohitKumar}")
     private String adminName;
 
-    @Value("${crosscheck.admin.email:HR@cross-check.in}")
+    @Value("${crosscheck.admin.email:HR@hourlyrecruit.com}")
     private String adminEmail;
 
-    @Value("${crosscheck.admin.password:Crosscheck@123}")
+    @Value("${crosscheck.admin.password:Bharath@1936}")
     private String adminPassword;
 
     @Bean
