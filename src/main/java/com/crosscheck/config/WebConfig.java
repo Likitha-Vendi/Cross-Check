@@ -8,19 +8,32 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-                .allowedOrigins(
-                        "http://localhost:5173",
-                        "http://localhost:3000",
-                        "https://cross-check-main-jade.vercel.app/"
-                )
-                .allowedMethods("*")
-                .allowedHeaders("*")
-                .allowCredentials(true);
-    }
-
+    // @Override
+    // public void addCorsMappings(CorsRegistry registry) {
+    //     registry.addMapping("/api/**")
+    //             .allowedOrigins(
+    //                     "http://localhost:5173",
+    //                     "http://localhost:3000",
+    //                     "https://cross-check-main-jade.vercel.app/"
+    //             )
+    //             .allowedMethods("*")
+    //             .allowedHeaders("*")
+    //             .allowCredentials(true);
+    // }
+@Override
+public void addCorsMappings(CorsRegistry registry) {
+    registry.addMapping("/api/**")
+            .allowedOrigins(
+                    "http://localhost:5173",
+                    "http://localhost:3000",
+                    "https://cross-check-main-jade.vercel.app",
+                    "https://cross-check.in",
+                    "https://www.cross-check.in"
+            )
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
+            .allowedHeaders("*")
+            .allowCredentials(true);
+}
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/uploads/**")
