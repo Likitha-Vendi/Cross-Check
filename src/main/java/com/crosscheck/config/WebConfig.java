@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "http://localhost:5173",
                         "http://localhost:3000",
-                        "https://cross-check-main-bfnt.vercel.app"
+                        "https://cross-check-main-jade.vercel.app/"
                 )
                 .allowedMethods("*")
                 .allowedHeaders("*")
